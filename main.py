@@ -8,7 +8,8 @@ product_list = [ products.Product("MacBook Air M2", price=1450, quantity=100),
                ]
 best_buy = store.Store(product_list)
 
-def start(store):
+def start(best_buy):
+    """Starts the store interface."""
     while True:
         print("Store Menu")
         print("----------")
@@ -20,12 +21,12 @@ def start(store):
         choice = int(input("Please choose a number: "))
 
         if choice == 1:
-            for product in store.get_all_products():
+            for product in best_buy.get_all_products():
                 product.show()
         elif choice == 2:
-            print(store.get_total_quantity())
+            print(best_buy.get_total_quantity())
         elif choice == 3:
-            active_products = store.get_all_products()
+            active_products = best_buy.get_all_products()
             print("------")
             for index, product in enumerate(active_products, 1):
                 print(f"{index}. ", end="")
@@ -45,7 +46,7 @@ def start(store):
                 print("Product added to list!")
 
             print("********")
-            total = store.order(shopping_list)
+            total = best_buy.order(shopping_list)
             print(f"Order made! Total payment: ${total}")
             print()
         else:
