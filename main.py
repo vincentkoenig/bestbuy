@@ -60,8 +60,10 @@ def start(best_buy):
             total = best_buy.order(shopping_list)
             print(f"Order made! Total payment: ${total}")
             print()
-        else:
+        elif choice == 4:
             break
+        else:
+            print("Choice has to be 1, 2, 3 or 4")
 
 
 if __name__ == "__main__":
