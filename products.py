@@ -3,16 +3,22 @@ class Product:
 
     def __init__(self, name, price, quantity):
         """Initializes the product with name, price and quantity."""
-        if name == "":
-            raise Exception("Name cannot be empty")
+        if not isinstance(name, str):
+            raise TypeError("Name must be a string")
+        elif name == "":
+            raise ValueError("Name cannot be empty")
         self.name = name
 
-        if price < 0:
-            raise Exception("Price cannot be negative")
+        if not isinstance(price, (int, float)):
+            raise TypeError("Price must be a float or a integer")
+        elif price < 0:
+            raise ValueError("Price cannot be negative")
         self.price = price
 
-        if quantity < 0:
-            raise Exception("Quantity cannot be negative")
+        if not isinstance(quantity, int):
+            raise TypeError("Quantity must be a integer")
+        elif quantity < 0:
+            raise ValueError("Quantity cannot be negative")
         self.quantity = quantity
 
         self.active = True
@@ -42,15 +48,19 @@ class Product:
         self.active = False
 
     def show(self):
-        """Prints the product details."""
-        print(f"{self.name}, Price: ${self.price}, Quantity: {self.quantity}")
+        """Returns the product details."""
+        return f"{self.name}, Price: ${self.price}, Quantity: {self.quantity}"
 
     def buy(self, quantity):
         """Buys a given quantity of the product and returns the total price."""
+        if not self.active:
+            raise ValueError("Product is not active")
+
         if quantity <= 0:
-            raise Exception("Quantity must be positive")
+            raise ValueError("Quantity must be positive")
+
         if quantity > self.quantity:
-            raise Exception("Not enough quantity in stock")
+            raise ValueError("Not enough quantity in stock")
 
         total_price = quantity * self.price
         self.set_quantity(self.quantity - quantity)

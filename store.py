@@ -1,18 +1,33 @@
 import products
+from products import Product
 
 class Store:
     """Represents a store with a list of products."""
 
     def __init__(self, product):
         """Initializes the store with a list of products."""
+        if not isinstance(product, list):
+            raise TypeError("Product is not a list")
+
+        for item in product:
+            if not isinstance(item, Product):
+                raise TypeError("All items in the list must be Product instances")
         self.product = product
 
     def add_product(self, product):
         """Adds a product to the store."""
+        if not isinstance(product, Product):
+            raise TypeError("Product is not a Product")
         self.product.append(product)
 
     def remove_product(self, product):
         """Removes a product from the store."""
+        if not isinstance(product, Product):
+            raise TypeError("Product is not a Product")
+
+        if product not in self.product:
+            raise ValueError("Product is not available")
+
         self.product.remove(product)
 
     def get_total_quantity(self):

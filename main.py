@@ -18,11 +18,15 @@ def start(best_buy):
         print("3. Make an order")
         print("4. Quit")
         print()
-        choice = int(input("Please choose a number: "))
+        try:
+            choice = int(input("Please choose a number: "))
+        except ValueError:
+            print("Please enter a valid number!")
+            continue
 
         if choice == 1:
             for product in best_buy.get_all_products():
-                product.show()
+                print(product.show())
         elif choice == 2:
             print(best_buy.get_total_quantity())
         elif choice == 3:
@@ -30,7 +34,7 @@ def start(best_buy):
             print("------")
             for index, product in enumerate(active_products, 1):
                 print(f"{index}. ", end="")
-                product.show()
+                print(product.show())
             print("------")
             print("When you want to finish order, enter empty text.")
 
