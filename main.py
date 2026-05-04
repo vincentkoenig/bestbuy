@@ -43,11 +43,18 @@ def start(best_buy):
                 product_choice = input("Which product # do you want? ")
                 if product_choice == "":
                     break
+
                 amount_choice = input("What amount do you want? ")
+
                 if amount_choice == "":
                     break
-                shopping_list.append((active_products[int(product_choice) - 1], int(amount_choice)))
-                print("Product added to list!")
+
+                try:
+                    shopping_list.append((active_products[int(product_choice) - 1], int(amount_choice)))
+                    print("Product added to list!")
+                except ValueError:
+                    print("Product not added to the list, try again")
+                    continue
 
             print("********")
             total = best_buy.order(shopping_list)
